@@ -49,7 +49,7 @@
 **환경 변수:**
 ```bash
 export NOTION_API_KEY="..."
-export NOTION_PAGE_ID="your_notion_page_id"
+export NOTION_PAGE_ID="2e996eed..."
 export GEMINI_API_KEY="..."
 # TODO: 추가 필요
 export SEMANTIC_SCHOLAR_API_KEY="..."
