@@ -1,5 +1,6 @@
 from paper_fetcher import search_arxiv_papers
 from semantic_scholar import SemanticScholarSearch
+from ddg_paper_search import DuckDuckGoSearch
 from typing import List, Dict
 
 def search_all_sources(query: str, max_results: int = 10) -> List[Dict]:
@@ -33,6 +34,19 @@ def search_all_sources(query: str, max_results: int = 10) -> List[Dict]:
             all_papers.append(paper)
     
     print(f"  Found {len(arxiv_papers)} papers from arXiv")
+    
+    # Search DuckDuckGo
+    print(f"🔍 Searching DuckDuckGo...")
+    ddg_search = DuckDuckGoSearch()
+    ddg_papers = ddg_search.search_papers(query, max_results=max_results)
+    
+    for paper in ddg_papers:
+        title_lower = paper["title"].lower()
+        if title_lower not in seen_titles:
+            seen_titles.add(title_lower)
+            all_papers.append(paper)
+    
+    print(f"  Found {len(ddg_papers)} papers from DuckDuckGo")
     print(f"📚 Total unique papers: {len(all_papers)}")
     
     return all_papers[:max_results]  # Limit to requested number

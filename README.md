@@ -4,7 +4,7 @@ Automatically search for research papers, generate Korean summaries using Gemini
 
 ## Features
 
-- 🔍 **Multi-Source Search**: Search papers from both Semantic Scholar and arXiv
+- 🔍 **Multi-Source Search**: Search papers from Semantic Scholar, arXiv, and DuckDuckGo
 - 📅 **Dynamic Database**: Creates a new database for each search with format `"{query} - {date}"`
 - 🇰🇷 **Gemini AI Integration**:
   - Batch processing: Process 20 papers in just 1 API call (60x more efficient!)
@@ -28,7 +28,7 @@ Automatically search for research papers, generate Korean summaries using Gemini
 ### 1. Install Required Packages
 
 ```bash
-pip install notion-client arxiv google-generativeai requests
+pip install notion-client arxiv google-generativeai requests duckduckgo-search
 ```
 
 ### 2. Set Environment Variables
@@ -83,9 +83,9 @@ paper_automation/
 ├── notion_client_wrapper.py     # Notion API wrapper
 ├── paper_fetcher.py             # arXiv search
 ├── semantic_scholar.py          # Semantic Scholar search
+├── ddg_paper_search.py          # DuckDuckGo web search
 ├── multi_source_search.py       # Combined search
-├── llm_translator.py            # Gemini AI integration
-└── TODO.md                      # Development roadmap
+└── llm_translator.py            # Gemini AI integration
 ```
 
 ## Key Features Explained
