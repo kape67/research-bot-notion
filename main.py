@@ -116,7 +116,8 @@ def main():
                 publisher_year=publisher_year,
                 detailed_summary_kr=detailed_summary_kr,
                 architecture_desc=architecture_desc,
-                llm_model=used_model
+                llm_model=used_model,
+                source=p.get('source', 'Unknown')
             )
         except Exception as e:
             print(f"  ❌ Failed to save: {e}")
