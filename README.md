@@ -5,6 +5,10 @@ Automatically search for research papers, generate Korean summaries using Gemini
 ## Features
 
 - 🔍 **Multi-Source Search**: Search papers from Semantic Scholar, arXiv, and DuckDuckGo
+- 🧠 **Smart Query Optimization**: Automatically optimizes queries using Gemini AI
+  - Language detection and translation (Korean → English)
+  - Intent understanding and keyword extraction
+  - Per-engine query optimization for better results
 - 📅 **Dynamic Database**: Creates a new database for each search with format `"{query} - {date}"`
 - 🇰🇷 **Gemini AI Integration**:
   - Batch processing: Process 20 papers in just 1 API call (60x more efficient!)
@@ -13,6 +17,7 @@ Automatically search for research papers, generate Korean summaries using Gemini
   - Architecture description - Inside page
 - 🔄 **Smart Fallback**: Automatically switches from Gemini 3 Flash to Gemini 2.5 Pro when quota is exceeded
 - 📊 **Model Tracking**: Records which AI model was used in Notion
+- 🔖 **Source Tracking**: Shows which search engine found each paper
 
 ## Notion Database Schema
 

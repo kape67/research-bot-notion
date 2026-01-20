@@ -5,6 +5,7 @@ from datetime import datetime
 from multi_source_search import search_all_sources
 from notion_client_wrapper import NotionManager
 from llm_translator import GeminiTranslator
+from query_optimizer import QueryOptimizer
 
 def main():
     parser = argparse.ArgumentParser(description="Search papers from multiple sources and save to Notion.")
@@ -31,6 +32,15 @@ def main():
         print("Korean summaries will be unavailable.")
         translator = None
     
+    # Initialize Query Optimizer
+    try:
+        optimizer = QueryOptimizer()
+        print("✓ Query optimizer initialized")
+    except Exception as e:
+        print(f"Warning: Could not initialize Query optimizer: {e}")
+        print("Will use original query without optimization.")
+        optimizer = None
+    
     # Create database for this query
     today = datetime.now().strftime("%Y-%m-%d")
     db_title = f"{args.query} - {today}"
@@ -41,12 +51,29 @@ def main():
         print(f"Failed to create database: {e}")
         sys.exit(1)
     
+    # Optimize query if optimizer is available
+    if optimizer:
+        print(f"\n🧠 Optimizing query...")
+        try:
+            optimized_queries = optimizer.optimize_query(args.query)
+            print(f"  Original: {optimized_queries['original']}")
+            print(f"  Semantic Scholar: {optimized_queries['semantic_scholar']}")
+            print(f"  arXiv: {optimized_queries['arxiv']}")
+            print(f"  DuckDuckGo: {optimized_queries['duckduckgo']}")
+            search_query = optimized_queries
+        except Exception as e:
+            print(f"  ⚠️  Optimization failed: {e}")
+            print(f"  Using original query: {args.query}")
+            search_query = args.query
+    else:
+        search_query = args.query
+    
     # Search papers from all sources
     print(f"\n{'='*60}")
     print(f"Query: {args.query}")
     print(f"{'='*60}\n")
     
-    papers = search_all_sources(args.query, max_results=args.limit)
+    papers = search_all_sources(search_query, max_results=args.limit)
     
     if not papers:
         print("No papers found.")
