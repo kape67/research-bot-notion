@@ -12,7 +12,7 @@ class QueryOptimizer:
             raise ValueError("GEMINI_API_KEY not found in environment variables")
         
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
     
     def optimize_query(self, user_query: str) -> Dict[str, str]:
         """
